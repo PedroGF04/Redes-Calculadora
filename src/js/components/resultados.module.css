@@ -1,0 +1,55 @@
+.calculationresults {
+    max-width: 900px;
+    margin: auto;
+    padding: 1rem;
+    font-family: Arial, sans-serif;
+  }
+  
+  h2 {
+    text-align: center;
+    color: #333;
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+  }
+  
+  .card {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  .card h3 {
+    color: #555;
+    font-size: 1.4rem;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .card p {
+    margin: 0.5rem 0;
+    color: #666;
+    font-size: 1rem;
+  }
+  
+  .card p strong {
+    color: #333;
+  }
+  
+  .no-subnets {
+    text-align: center;
+    color: #ff6b6b;
+    font-weight: bold;
+  }
+  
+  @media (min-width: 768px) {
+    .calculation-results {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: 1rem;
+    }
+  }
+  
