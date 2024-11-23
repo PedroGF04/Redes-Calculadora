@@ -31,31 +31,6 @@ function App() {
   boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', // Sombra para un efecto de relieve
 }}>
 
-<img 
-    src="https://www.pngmart.com/files/23/Mha-PNG.png" 
-    alt="Decoración esquina izquierda" 
-    style={{
-      position: 'fixed',
-      top: '-20px',
-      left: '-20px',
-      width: '500px',
-      height: '500px',
-    }}
-  />
-
-  {/* Imagen decorativa en la esquina inferior derecha */}
-  <img 
-    src="https://th.bing.com/th/id/OIP.Fq3aq3L4dIOuAP4rbr2q2AHaGL?rs=1&pid=ImgDetMain" 
-    alt="Decoración esquina derecha" 
-    style={{
-      position: 'fixed',
-      bottom: '-20px',
-      right: '-20px',
-      width: '500px',
-      height: '500px',
-    }}
-  />
-
   <h1 style={{
     fontSize: '2rem',
     color: '#333',
