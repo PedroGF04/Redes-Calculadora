@@ -2,9 +2,14 @@ function calcularSubred(ip, mask, subnetMask) {
     const ipParts = ip.split('.').map(Number);
     if (
       ipParts.length !== 4 ||
-      ipParts.some((part) => isNaN(part) || part < 0 || part > 255)
+      ipParts.some((part) => isNaN(part) || part < 0 || part > 255) ||
+      ipParts.some((part) => part === '' || ip.split('.').includes('')) // Evitar octetos vacíos
     ) {
       return { error: 'Dirección IP no válida' };
+    }
+
+    if (isNaN(mask) || mask < 1 || mask > 32) {
+      return { error: 'Máscara de red no válida.'};
     }
   
     const ipInt = ipParts.reduce((acc, part) => (acc << 8) | part, 0) >>> 0;

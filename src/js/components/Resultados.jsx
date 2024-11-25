@@ -92,7 +92,7 @@ function Resultados({ data }) {
   )}
 
   {!hasSubnets && (
-    <p className={Styles.no-subnets}>No se calcularon subredes porque no se proporcionó una máscara de subred o no es válida.</p>
+    <p className={Styles.no-subnets}>No se calcularon subredes porque no se proporcionó una máscara de subred.</p>
   )}
 </div>
 
