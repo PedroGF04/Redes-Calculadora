@@ -22,12 +22,46 @@ function calcularSubred(ip, mask, subnetMask) {
     const originalBroadcast = intToIp(broadcastInt);
     const originalHostMin = intToIp(networkInt + 1);
     const originalHostMax = intToIp(broadcastInt - 1);
-    const totalHostsOriginal = (1 << (32 - mask)) - 2;
+    const totalHostsOriginal = mask === 31 ? 2 : mask === 32 ? 1 : (mask < 32) ? Math.pow(2, 32 - mask) - 2 : 0;
   
     const tipo = getIpClass(ipParts[0]);
   
     //Calcular la Wildcard
     const wildcard = intToIp(~networkMask >>> 0)
+
+    if (mask === 31){
+      return{
+        originalIp: ip,
+        originalIpBinary: intToBinary(ipInt),
+        mask: mask,
+        maskDecimal: intToIp(networkMask),
+        maskBinary: intToBinary(networkMask),
+        wildcard,
+        wildcardBinary: intToBinary(~networkMask >>> 0),
+        originalNetwork: intToIp(networkInt),
+        originalNetworkBinary: intToBinary(networkInt),
+        originalHostMin,
+        originalHostMinBinary: originalHostMin ? intToBinary(networkInt + 1) : null,
+        originalHostMax,
+        originalHostMaxBinary: originalHostMax ? intToBinary(broadcastInt - 1) : null,
+        totalHostsOriginal,
+        tipo,
+      };
+    }
+
+    if (mask === 32){
+      return{
+        originalIp: ip,
+        originalIpBinary: intToBinary(ipInt),
+        mask: mask,
+        maskDecimal: intToIp(networkMask),
+        maskBinary: intToBinary(networkMask),
+        wildcard,
+        wildcardBinary: intToBinary(~networkMask >>> 0),
+        totalHostsOriginal,
+        tipo,
+      };
+    }
   
     // Si subnetMask es nula, devolver solo los datos originales
     if (subnetMask == null) {
@@ -52,15 +86,15 @@ function calcularSubred(ip, mask, subnetMask) {
       };
     }
   
-    if (isNaN(subnetMask) || subnetMask < mask || subnetMask > 32) {
+    if (isNaN(subnetMask) || subnetMask < mask || subnetMask > 32 || subnetMask == mask) {
       return { error: 'Máscara de subred no válida' };
     }
   
     const subnetMaskInt = (-1 << (32 - subnetMask)) >>> 0;
   
     const totalSubnets = 1 << (subnetMask - mask);
-    const hostsPerSubnet = (1 << (32 - subnetMask)) - 2;
-    const subnetIncrement = hostsPerSubnet + 2;
+    const hostsPerSubnet = Number(subnetMask) === 32 ? 1 : (1 << (32 - subnetMask)) - 2;
+    const subnetIncrement = 1 << (32 - subnetMask);
   
     const subnets = [];
     const maxSubnetsToShow = 1000; // Máximo de subredes a mostrar
