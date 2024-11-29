@@ -94,7 +94,7 @@ function calcularSubred(ip, mask, subnetMask) {
   
     const totalSubnets = 1 << (subnetMask - mask);
     const hostsPerSubnet = Number(subnetMask) === 32 ? 1 : (1 << (32 - subnetMask)) - 2;
-    const subnetIncrement = 1 << (32 - subnetMask);
+    const subnetIncrement = hostsPerSubnet + 2;
   
     const subnets = [];
     const maxSubnetsToShow = 1000; // Máximo de subredes a mostrar
@@ -150,6 +150,23 @@ function calcularSubred(ip, mask, subnetMask) {
   
     // Calcular el total de hosts de todas las subredes
     const totalHostsAllSubnets = totalSubnets * hostsPerSubnet;
+
+    if (subnetMask == 32){
+      return{
+        tipo,
+        subnetMask: subnetMask,
+        subnetMaskDecimal: intToIp(subnetMaskInt),
+        subnetMaskBinary: intToBinary(subnetMaskInt),
+        SubnetWildcard,
+        SubnetWildcardBinary: intToBinary(~subnetMaskInt >>> 0),
+        totalSubnets,
+        hostsPerSubnet,
+        totalHostsAllSubnets,
+        subnetIncrement,
+        subnets,
+        limitedSubnets: totalSubnets > maxSubnetsToShow, // Indica si se limitó la lista
+      };
+    }
     
     return {
       originalIp: ip,

@@ -46,21 +46,42 @@ function Resultados({ data }) {
   // Limitar subredes a 1000
   const subnetsToShow = hasSubnets ? subnets.slice(0, 1000) : [];
 
+  // Condición para mostrar si la máscara es 32
+  const isMask32 = mask === 32;
+
+  // Condición para mostrar si la máscara es 32
+  const isSubMask32 = subnetMask == 32;
+
   return (
     <div className={Styles.calculationresults}>
   <h2>Resultados del Cálculo</h2>
-  <div className={Styles.card}>
-    <h3>Direccionamiento ClassFull:</h3>
-    <p><strong>Dirección IP:</strong> {originalIp} {originalIpBinary}</p>
-    <p><strong>Máscara de Red:</strong> /{mask} ({maskDecimal}) {maskBinary}</p>
-    <p><strong>Wildcard:</strong> {wildcard} {wildcardBinary}</p>
-    <p><strong>Red:</strong> {originalNetwork} {originalNetworkBinary}</p>
-    <p><strong>HostMin:</strong> {originalHostMin} {originalHostMinBinary}</p>
-    <p><strong>HostMax:</strong> {originalHostMax} {originalHostMaxBinary}</p>
-    <p><strong>Broadcast:</strong> {originalBroadcast} {originalBroadcastBinary}</p>
-    <p><strong>Host por Red:</strong> {totalHostsOriginal}</p>
-    <p><strong>Tipo de IP:</strong> {tipo}</p>
-  </div>
+  {!isMask32 && (
+    <div className={Styles.card}>
+      <h3>Direccionamiento ClassFull:</h3>
+      <p><strong>Dirección IP:</strong> {originalIp} {originalIpBinary}</p>
+      <p><strong>Máscara de Red:</strong> /{mask} ({maskDecimal}) {maskBinary}</p>
+      <p><strong>Wildcard:</strong> {wildcard} {wildcardBinary}</p>
+      <p><strong>Red:</strong> {originalNetwork} {originalNetworkBinary}</p>
+      <p><strong>HostMin:</strong> {originalHostMin} {originalHostMinBinary}</p>
+      <p><strong>HostMax:</strong> {originalHostMax} {originalHostMaxBinary}</p>
+      <p><strong>Broadcast:</strong> {originalBroadcast} {originalBroadcastBinary}</p>
+      <p><strong>Host por Red:</strong> {totalHostsOriginal}</p>
+      <p><strong>Tipo de IP:</strong> {tipo}</p>
+    </div>
+  )}
+
+  {/* Show additional details if mask is 32 */}
+  {isMask32 && (
+      <div className={Styles.card}>
+        <h3>Direccionamiento ClassFull:</h3>
+        <p><strong>Dirección IP:</strong> {originalIp} {originalIpBinary}</p>
+        <p><strong>Máscara de Red:</strong> /{mask} ({maskDecimal}) {maskBinary}</p>
+        <p><strong>Wildcard:</strong> {wildcard} {wildcardBinary}</p>
+        <p><strong>Ruta de Host:</strong> {originalIp} {originalIpBinary}</p>
+        <p><strong>Host por Red:</strong> {totalHostsOriginal}</p>
+        <p><strong>Tipo de IP:</strong> {tipo}</p>
+      </div>
+  )}
 
   {hasSubnets && (
     <>
