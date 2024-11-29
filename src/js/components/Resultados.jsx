@@ -49,9 +49,6 @@ function Resultados({ data }) {
   // Condición para mostrar si la máscara es 32
   const isMask32 = mask === 32;
 
-  // Condición para mostrar si la máscara es 32
-  const isSubMask32 = subnetMask == 32;
-
   return (
     <div className={Styles.calculationresults}>
   <h2>Resultados del Cálculo</h2>
